@@ -1,0 +1,29 @@
+{
+  "license": "BSD",
+  "author": "azer",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kaktus/db.git"
+  },
+  "scripts": {
+    "test": "node test -b"
+  },
+  "main": "index.js",
+  "description": "Kaktus Database",
+  "version": "0.0.0",
+  "name": "db",
+  "dependencies": {
+    "anglicize": "github:azer/anglicize",
+    "indexeddb": "github:kaktus/indexeddb",
+    "less-common-words": "github:azer/less-common-words",
+    "mime-of": "github:azer/mime-of",
+    "mix-objects": "github:azer/mix-objects",
+    "title-from-url": "github:azer/title-from-url",
+    "unique-now": "0.0.1-security",
+    "uniques": "github:azer/uniques",
+    "urls": "github:kaktus/urls"
+  },
+  "devDependencies": {
+    "prova": "github:azer/prova"
+  }
+}
