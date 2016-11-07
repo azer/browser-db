@@ -18,3 +18,7 @@ Database library of Kaktus. It consists of 5 IndexedDB storages;
 ```bash
 $ npm install kaktus/db
 ```
+
+## Manual
+
+See the `test/` folder for documentation & usage examples.

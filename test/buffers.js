@@ -21,7 +21,7 @@ test('creating an empty buffer', function (t) {
       t.error(error);
       t.ok(row)
       t.equal(row.url, '')
-      t.equal(row.selected, 0)
+      t.equal(row.selected, 1)
       t.equal(row.window, windowId)
       t.ok(row.createdAt > Date.now() - 10000)
       flush()
@@ -47,7 +47,7 @@ test('listing all buffers', function (t) {
 
       t.ok(ctr < 4)
       t.equal(result.value.url, expected[++ctr]);
-      t.equal(result.value.selected, 0);
+      t.equal(result.value.selected, result.value.id === 4 ? 1 : 0)
       t.equal(result.value.window, 314)
       t.ok(result.value.createdAt > Date.now() - 10000)
       result.continue()
@@ -63,7 +63,7 @@ test('set as selected', function (t) {
   createSomeBuffers(windowId, error => {
     t.error(error)
 
-    buffers.setAsSelected(windowId, 3, error => {
+    buffers.setAsSelected(3, error => {
       t.error(error)
 
       buffers.getSelected(windowId, (error, row) => {
@@ -79,26 +79,49 @@ test('set as selected', function (t) {
 test('set as unselected', function (t) {
   const flush = buffers.test()
   const windowId = 333
-  t.plan(8)
+  t.plan(6)
 
   createSomeBuffers(windowId, error => {
     t.error(error)
 
-    buffers.setAsSelected(windowId, 3, error => {
+    buffers.setAsSelected(2, error => {
       t.error(error)
 
-      buffers.setAsUnselected(windowId, 3, error => {
+      buffers.setAsUnselected(2, error => {
         t.error(error)
 
-        buffers.get(3, (error, row) => {
+        buffers.get(2, (error, row) => {
           t.error(error)
-          t.equal(row.id, 3)
+          t.equal(row.id, 2)
           t.equal(row.selected, 0)
         })
+      })
+    })
+  })
+})
 
-        buffers.getSelected(windowId, (error, row) => {
+test('select', function (t) {
+  const flush = buffers.test()
+  const windowId = 333
+  t.plan(7)
+
+  createSomeBuffers(windowId, error => {
+    t.error(error)
+
+    buffers.select(windowId, 3, error => {
+      t.error(error)
+
+      buffers.getSelected(windowId, (error, row) => {
+        t.error(error)
+        t.equal(row.id, 3)
+
+        buffers.select(windowId, 2, error => {
           t.error(error)
-          t.notOk(row)
+
+          buffers.getSelected(windowId, (error, row) => {
+            t.error(error)
+            t.equal(row.id, 2)
+          })
         })
       })
     })
