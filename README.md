@@ -58,7 +58,7 @@ See [API Reference](#API) or the `test/` folder for more documentation.
 
 ## API
 
-#### Buffers
+### Buffers
 
 URLs user viewing (a.k.a tabs)
 
@@ -70,9 +70,9 @@ URLs user viewing (a.k.a tabs)
 * kill
 * setURL
 
-#### Positions
+### Positions
 
-Every buffer is displayed via a position that stores its geometrical info.
+Every buffer is displayed via a position that stores its geometrical info. Using this, we can show multiple buffers in one display easily.
 
 **Methods:**
 * all
@@ -85,7 +85,7 @@ Every buffer is displayed via a position that stores its geometrical info.
 * setPosition
 * kill
 
-#### Domains
+### Domains
 
 Domain information & settings
 
@@ -94,7 +94,7 @@ Domain information & settings
 * set
 * setPrivateMode
 
-#### Downloads
+### Downloads
 
 All downloads made
 
@@ -102,7 +102,7 @@ All downloads made
 * all
 * download
 
-#### Files
+### Files
 
 Blob file database. It's used by other storages like [screenshots](#screenshots) and [icons](#icons).
 
@@ -111,7 +111,7 @@ Blob file database. It's used by other storages like [screenshots](#screenshots)
 * set
 * delete: del
 
-#### History
+### History
 
 All URLs visited
 
@@ -121,14 +121,14 @@ All URLs visited
 * popularThisWeek
 * visit
 
-#### Icons
+### Icons
 
 LRU[250] storage for website icons
 
 * add
 * get
 
-#### Keywords
+### Keywords
 
 Every keyword extracted has its own row pointing to a URL. Storing keywords lets Kaktüs search history, likes and downloads.
 
@@ -141,7 +141,7 @@ Every keyword extracted has its own row pointing to a URL. Storing keywords lets
 * markAsDownloaded
 * markAsNotDownloaded
 
-#### Likes
+### Likes
 
 Liked URLs
 
@@ -151,7 +151,7 @@ Liked URLs
 * like
 * unlike
 
-#### Meta
+### Meta
 
 Meta information of all URLs visited (title, icon, etc)
 
@@ -160,7 +160,7 @@ Meta information of all URLs visited (title, icon, etc)
 * get
 * set
 
-#### Screenshots
+### Screenshots
 
 LRU[10] storage for screenshots
 
