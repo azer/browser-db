@@ -10,31 +10,29 @@ const data = [
 
 test('creating an empty buffer', function (t) {
   const flush = buffers.test()
-  const windowId = 1
 
-  t.plan(7)
+  t.plan(6)
 
-  buffers.create(windowId, '', (error, id) => {
+  buffers.create(333, '', (error, id) => {
     t.error(error)
 
     buffers.get(id, (error, row) => {
       t.error(error);
+      if (!row) return flush()
       t.ok(row)
       t.equal(row.url, '')
-      t.equal(row.selected, 1)
-      t.equal(row.window, windowId)
+      t.equal(row.window, 333);
       t.ok(row.createdAt > Date.now() - 10000)
-      flush()
     })
   })
 })
 
 test('listing all buffers', function (t) {
   const flush = buffers.test()
-  t.plan(26)
+  t.plan(22)
 
   const expected = [
-    '', 'foo.com', 'bar.com', 'qux.com'
+    'qux.com', 'bar.com', 'foo.com', ''
   ]
 
   createSomeBuffers(314, error => {
@@ -47,7 +45,6 @@ test('listing all buffers', function (t) {
 
       t.ok(ctr < 4)
       t.equal(result.value.url, expected[++ctr]);
-      t.equal(result.value.selected, result.value.id === 4 ? 1 : 0)
       t.equal(result.value.window, 314)
       t.ok(result.value.createdAt > Date.now() - 10000)
       result.continue()
@@ -55,74 +52,40 @@ test('listing all buffers', function (t) {
   })
 })
 
-test('set as selected', function (t) {
+test('all should return default buffer when there isnt any', function (t) {
   const flush = buffers.test()
-  const windowId = 222
-  t.plan(6)
+  t.plan(5)
 
-  createSomeBuffers(windowId, error => {
+  buffers.all(333, (error, row) => {
     t.error(error)
+    if (!row) return flush()
 
-    buffers.setAsSelected(3, error => {
-      t.error(error)
-
-      buffers.getSelected(windowId, (error, row) => {
-        t.error(error)
-        t.equal(row.id, 3)
-        t.equal(row.window, 222)
-        t.equal(row.selected, 1);
-      })
-    })
+    t.equal(row.value.id, 1)
+    t.equal(row.value.url, '');
+    t.equal(row.value.window, 333);
+    row.continue()
   })
 })
 
-test('set as unselected', function (t) {
+test('finding a buffer by window+url', function (t) {
   const flush = buffers.test()
-  const windowId = 333
-  t.plan(6)
 
-  createSomeBuffers(windowId, error => {
-    t.error(error)
-
-    buffers.setAsSelected(2, error => {
-      t.error(error)
-
-      buffers.setAsUnselected(2, error => {
-        t.error(error)
-
-        buffers.get(2, (error, row) => {
-          t.error(error)
-          t.equal(row.id, 2)
-          t.equal(row.selected, 0)
-        })
-      })
-    })
-  })
-})
-
-test('select', function (t) {
-  const flush = buffers.test()
-  const windowId = 333
   t.plan(7)
 
-  createSomeBuffers(windowId, error => {
+  buffers.create(333, 'yolo.com/?', (error, id) => {
     t.error(error)
 
-    buffers.select(windowId, 3, error => {
+    buffers.create(444, 'yolo.com', (error, id) => {
       t.error(error)
 
-      buffers.getSelected(windowId, (error, row) => {
+      buffers.find(333, 'yolo.com/', (error, row) => {
         t.error(error)
-        t.equal(row.id, 3)
+        if (!row) return flush()
 
-        buffers.select(windowId, 2, error => {
-          t.error(error)
-
-          buffers.getSelected(windowId, (error, row) => {
-            t.error(error)
-            t.equal(row.id, 2)
-          })
-        })
+        t.ok(row)
+        t.equal(row.url, 'yolo.com')
+        t.equal(row.window, 333)
+        t.ok(row.createdAt > Date.now() - 10000)
       })
     })
   })
@@ -133,7 +96,7 @@ function createSomeBuffers (window, callback) {
     if (data.length <= i) return callback()
     buffers.create(window, data[i], error => {
       if (error) return callback(error)
-      next(i+1)
+      setTimeout(next, 100, i+1)
     })
   }(0))
 }
