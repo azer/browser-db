@@ -34,9 +34,10 @@ A web browsing session starts with showing the buffer(s) of the current session.
 
 ```js
 const db = require('db')
+const windowId = 1
 
 // Grab all the positions
-db.positions.all((error, row) => {
+db.positions.all(windowId, (error, row) => {
   if (error) throw error
 
   row.value.width
