@@ -21,7 +21,8 @@
     "title-from-url": "github:azer/title-from-url",
     "unique-now": "0.0.1-security",
     "uniques": "github:azer/uniques",
-    "urls": "github:kaktus/urls"
+    "urls": "github:kaktus/urls",
+    "parallel-loop": "github:azer/parallel-loop"
   },
   "devDependencies": {
     "prova": "github:azer/prova"
