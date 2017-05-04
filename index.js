@@ -9,8 +9,10 @@ const icons = require("./lib/icons")
 const downloads = require("./lib/downloads")
 const positions = require("./lib/positions")
 const keywords = require("./lib/keywords")
+const db = require("./lib/db")
 
 module.exports = {
+  db,
   buffers,
   history,
   likes,
