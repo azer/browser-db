@@ -1,17 +1,11 @@
 {
-  "license": "BSD",
-  "author": "azer",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:kaktus/db.git"
-  },
+  "name": "db",
+  "version": "0.0.0",
   "scripts": {
     "test": "node test -b"
   },
   "main": "index.js",
   "description": "Kaktus Database",
-  "version": "0.0.0",
-  "name": "db",
   "dependencies": {
     "anglicize": "github:azer/anglicize",
     "indexeddb": "github:kaktus/indexeddb",
