@@ -1,6 +1,6 @@
 ## db
 
-Database library of Kaktus. It consists of following IndexedDB storages;
+Database of [Kaktüs](https://github.com/kaktus/kaktus) Web Browser. It consists of following [IndexedDB storages](https://github.com/azer/indexeddb);
 
 * [Buffers](#buffers)
 * [Positions](#positions)
@@ -13,6 +13,8 @@ Database library of Kaktus. It consists of following IndexedDB storages;
 * [Screenshots](#screenshots)
 * [Icons](#icons)
 * [Files](#files)
+
+## Concept
 
 Here is some quick bulletpoints about how this DB interacts with Kaktus:
 
