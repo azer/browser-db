@@ -12,11 +12,11 @@
     "less-common-words": "github:azer/less-common-words",
     "mime-of": "github:azer/mime-of",
     "mix-objects": "github:azer/mix-objects",
+    "parallel-loop": "github:azer/parallel-loop",
     "title-from-url": "github:azer/title-from-url",
     "unique-now": "0.0.1-security",
     "uniques": "github:azer/uniques",
-    "urls": "github:kaktus/urls",
-    "parallel-loop": "github:azer/parallel-loop"
+    "urls": "github:kaktus/urls"
   },
   "devDependencies": {
     "prova": "github:azer/prova"
